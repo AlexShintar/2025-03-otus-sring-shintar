@@ -9,11 +9,11 @@ import ru.otus.hw.domain.Question;
 import ru.otus.hw.exceptions.QuestionReadException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -27,10 +27,11 @@ public class CsvQuestionDao implements QuestionDao {
             throw new QuestionReadException("File name is not provided");
         }
         ClassLoader classLoader = getClass().getClassLoader();
-        try (Reader reader = new InputStreamReader(
-                Objects.requireNonNull(classLoader.getResourceAsStream(fileName),
-                        "Resource not found: " + fileName), StandardCharsets.UTF_8)) {
-
+        InputStream resourceStream = classLoader.getResourceAsStream(fileName);
+        if (resourceStream == null) {
+            throw new QuestionReadException("Resource not found: " + fileName);
+        }
+        try (Reader reader = new InputStreamReader(resourceStream, StandardCharsets.UTF_8)) {
             CsvToBean<QuestionDto> csvToBean = new CsvToBeanBuilder<QuestionDto>(reader)
                     .withType(QuestionDto.class)
                     .withSkipLines(1)
@@ -41,7 +42,6 @@ public class CsvQuestionDao implements QuestionDao {
                     .stream()
                     .map(QuestionDto::toDomainObject)
                     .collect(Collectors.toList());
-
         } catch (IOException e) {
             throw new QuestionReadException("Error reading CSV file", e);
         }
