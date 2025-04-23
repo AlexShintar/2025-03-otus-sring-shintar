@@ -1,7 +1,6 @@
 package ru.otus.hw.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
@@ -16,33 +15,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestServiceImpl implements TestService {
 
+    private static final String PROMPT_START = "Please answer the questions below%n";
+
+    private static final String PROMPT_SELECT = "Select answer number:";
+
+    private static final String PROMPT_QUESTION = "Question %d: %s";
+
+    private static final String ERROR_SELECT = "Invalid choice. Enter a number between %d and %d";
+
+    private static final String ERROR_NO_QUEST = "No questions found";
+
     private final IOService ioService;
 
     private final QuestionDao questionDao;
 
-    @Value("${TestService.prompt.start}")
-    private String promptStart;
-
-    @Value("${TestService.prompt.select}")
-    private String promptSelect;
-
-    @Value("${TestService.prompt.question}")
-    private String promptQuestion;
-
-    @Value("${TestService.error.select}")
-    private String errorSelectPattern;
-
-    @Value("${TestService.error.noQuestions}")
-    private String errorNoQuestions;
-
     @Override
     public TestResult executeTestFor(Student student) {
         ioService.printLine("");
-        ioService.printFormattedLine(promptStart);
+        ioService.printFormattedLine(PROMPT_START);
 
         var questions = questionDao.findAll();
         if (questions.isEmpty()) {
-            throw new QuestionReadException(errorNoQuestions);
+            throw new QuestionReadException(ERROR_NO_QUEST);
         }
         var testResult = new TestResult(student);
         int questionIndex = 1;
@@ -57,17 +51,17 @@ public class TestServiceImpl implements TestService {
         printQuestionWithAnswers(question, index);
 
         int max = question.answers().size();
-        String errorSelect = String.format(errorSelectPattern, 1, max);
+        String errorSelect = String.format(ERROR_SELECT, 1, max);
 
         int choice = ioService.readIntForRangeWithPrompt(
-                1, max, promptSelect, errorSelect
+                1, max, PROMPT_SELECT, errorSelect
         );
         boolean isAnswerValid = question.answers().get(choice - 1).isCorrect();
         result.applyAnswer(question, isAnswerValid);
     }
 
     private void printQuestionWithAnswers(Question question, int index) {
-        ioService.printFormattedLine(promptQuestion, index, question.text());
+        ioService.printFormattedLine(PROMPT_QUESTION, index, question.text());
         List<Answer> answers = question.answers();
         for (int i = 0; i < answers.size(); i++) {
             ioService.printFormattedLine("  %d) %s", i + 1, answers.get(i).text());

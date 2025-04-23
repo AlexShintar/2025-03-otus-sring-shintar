@@ -13,19 +13,20 @@ import ru.otus.hw.domain.Student;
 import ru.otus.hw.domain.TestResult;
 import ru.otus.hw.exceptions.QuestionReadException;
 
-import java.lang.reflect.Field;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TestServiceImplTest {
 
-    private static final String PROMPT_SELECT    = "Select answer number:";
-    private static final String ERROR_SELECT     = "Invalid choice. Enter a number between %d and %d";
-    private static final String ERROR_NO_QUEST   = "No questions found";
+    private static final String PROMPT_SELECT = "Select answer number:";
+    private static final String ERROR_SELECT = "Invalid choice. Enter a number between %d and %d";
+    private static final String ERROR_NO_QUEST = "No questions found";
 
     @Mock
     private IOService ioService;
@@ -38,20 +39,9 @@ class TestServiceImplTest {
     private Student testStudent;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         testService = new TestServiceImpl(ioService, questionDao);
-
-        setField("promptSelect", PROMPT_SELECT);
-        setField("errorSelectPattern", ERROR_SELECT);
-        setField("errorNoQuestions", ERROR_NO_QUEST);
-
         testStudent = new Student("Bob", "Smith");
-    }
-
-    private void setField(String name, Object value) throws Exception {
-        Field f = TestServiceImpl.class.getDeclaredField(name);
-        f.setAccessible(true);
-        f.set(testService, value);
     }
 
     @Test
