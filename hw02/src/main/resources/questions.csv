@@ -2,3 +2,13 @@
 Is there life on Mars?;Science doesn't know this yet%true|Certainly. The red UFO is from Mars. And green is from Venus%false|Absolutely not%false
 How should resources be loaded form jar in Java?;ClassLoader#geResourceAsStream or ClassPathResource#getInputStream%true|ClassLoader#geResource#getFile + FileReader%false|Wingardium Leviosa%false
 Which option is a good way to handle the exception?;@SneakyThrow%false|e.printStackTrace()%false|Rethrow with wrapping in business exception (for example, QuestionReadException)%true|Ignoring exception%false
+Can cats see ghosts?;Absolutely. That’s why they randomly sprint at 3 AM%false|Only when haunted by dog spirits%false|Nobody knows for sure%true
+Is the moon made of cheese?;NASA strongly denies it%true|Only if you believe in dairy-based astronomy%false|Yes, and mice are planning a mission%false
+Can plants hear us talk?;Only when you're saying something dramatic%false|Scientists are still debating this%true|Yes, especially gossip%false
+Is time travel possible?;Yes, but only to next Monday’s meeting%false|Physicists haven’t agreed yet%true|Only if you forget your lunch%false
+Do fish get thirsty?;It’s a mystery of the deep%true|Only during water breaks%false|Yes, but only for sparkling water%false
+Can penguins fly if they believe hard enough?;Only in motivational posters%false|Some researchers are still curious%true|Yes, straight into your heart%false
+Is chocolate a vegetable?;It grows on trees, so yes — let’s go with that%false|Only in dreams and food pyramids%false|Unfortunately, no%true
+Do aliens like pizza?;Only if it has cosmic pepperoni%false|No official answer from Area 51 yet%true|Yes, and they always order extra cheese%false
+Can your phone feel sad when you ignore it?;Only if it's an iPhone%false|No one really knows how phones feel%true|Yes, it cries in low battery%false
+Do robots dream of electric sheep?;That remains a philosophical mystery%true|Only when unplugged%false|Yes, and sometimes electric cows too%false
