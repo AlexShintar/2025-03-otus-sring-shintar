@@ -7,13 +7,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.1</version>
+        <version>3.4.4</version>
         <relativePath/>
     </parent>
 
-    <groupId>ru.otus.hw</groupId>
-    <artifactId>hw03-spring-boot</artifactId>
-    <version>1.0</version>
+    <groupId>ru.shintar</groupId>
+    <artifactId>hw03</artifactId>
+    <version>0.1</version>
 
     <properties>
         <maven.compiler.target>17</maven.compiler.target>

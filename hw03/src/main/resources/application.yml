@@ -7,7 +7,8 @@ spring:
     fallbackToSystemLocale: false
 test:
   rightAnswersCountToPass: 3
-  locale: en-US
+  locale: ru_RU
+  defaultFile: questions.csv
   fileNameByLocaleTag:
     ru-RU: questions_ru.csv
     en-US: questions.csv
