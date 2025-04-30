@@ -1,1 +1,1 @@
-# 2025-03-otus-sring-shintar
+# 2025-03-otus-spring-shintar
