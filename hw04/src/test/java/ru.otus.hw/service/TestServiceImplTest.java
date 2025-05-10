@@ -3,9 +3,9 @@ package ru.otus.hw.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
@@ -21,26 +21,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest(classes = TestServiceImpl.class)
 class TestServiceImplTest {
 
     private static final String PROMPT_SELECT = "Select answer number:";
     private static final String ERROR_SELECT = "Invalid choice. Enter a number between %d and %d";
     private static final String ERROR_NO_QUEST = "No questions found";
 
-    @Mock
+    @MockitoBean
     private LocalizedIOService ioService;
 
-    @Mock
+    @MockitoBean
     private QuestionDao questionDao;
 
+    @Autowired
     private TestServiceImpl testService;
 
     private Student testStudent;
 
     @BeforeEach
     void setUp() {
-        testService = new TestServiceImpl(ioService, questionDao);
         testStudent = new Student("Bob", "Smith");
     }
 
