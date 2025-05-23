@@ -1,8 +1,14 @@
 spring:
   datasource:
     url: jdbc:h2:mem:maindb
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
   sql:
     init:
-      mode: always
-      data-locations: data.sql
-      schema-locations: schema.sql
+      mode: never
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
