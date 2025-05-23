@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-05-15-insert-authors
+      author: ash
+      changes:
+        - insert:
+            tableName: authors
+            columns:
+              - column: { name: full_name, value: 'Author_1' }
+        - insert:
+            tableName: authors
+            columns:
+              - column: { name: full_name, value: 'Author_2' }
+        - insert:
+            tableName: authors
+            columns:
+              - column: { name: full_name, value: 'Author_3' }

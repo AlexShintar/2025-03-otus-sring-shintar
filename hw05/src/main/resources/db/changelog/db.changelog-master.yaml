@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - includeAll:
+      relativeToChangelogFile: true
+      path: table
+  - includeAll:
+      relativeToChangelogFile: true
+      path: join
+  - includeAll:
+      relativeToChangelogFile: true
+      path: data
