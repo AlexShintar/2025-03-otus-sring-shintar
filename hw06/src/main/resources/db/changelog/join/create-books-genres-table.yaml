@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-05-15-create-books-genres-table
+      author: ash
+      changes:
+        - createTable:
+            tableName: books_genres
+            columns:
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_bg_book
+                    referencedTableName: books
+                    referencedColumnNames: id
+                    onDelete: CASCADE
+              - column:
+                  name: genre_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_bg_genre
+                    referencedTableName: genres
+                    referencedColumnNames: id
+                    onDelete: CASCADE
+            constraints:
+              primaryKey:
+                columnNames: book_id, genre_id
