@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-05-15-create-authors-table
+      author: ash
+      changes:
+        - createTable:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)

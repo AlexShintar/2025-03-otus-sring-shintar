@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-05-15-create-genres-table
+      author: ash
+      changes:
+        - createTable:
+            tableName: genres
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
