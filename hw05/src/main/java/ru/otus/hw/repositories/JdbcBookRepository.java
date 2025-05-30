@@ -36,9 +36,9 @@ public class JdbcBookRepository implements BookRepository {
                        g.id        AS genre_id,
                        g.name      AS genre_name
                 FROM books b
-                  JOIN authors a ON b.author_id = a.id
-                  LEFT JOIN books_genres bg ON b.id = bg.book_id
-                  LEFT JOIN genres g        ON bg.genre_id = g.id
+                    JOIN authors a ON b.author_id = a.id
+                    LEFT JOIN books_genres bg ON b.id = bg.book_id
+                    LEFT JOIN genres g        ON bg.genre_id = g.id
                 WHERE b.id = :id
                 """;
         var params = Map.of("id", id);
@@ -50,12 +50,16 @@ public class JdbcBookRepository implements BookRepository {
     @Override
     public List<Book> findAll() {
         String sql = """
-                SELECT b.id, b.title, b.author_id, a.full_name AS author_name,
-                       g.id AS genre_id, g.name AS genre_name
+                SELECT b.id,
+                       b.title,
+                       b.author_id,
+                       a.full_name AS author_name,
+                       g.id        AS genre_id,
+                       g.name      AS genre_name
                 FROM books b
-                JOIN authors a ON b.author_id = a.id
-                LEFT JOIN books_genres bg ON b.id = bg.book_id
-                LEFT JOIN genres g ON bg.genre_id = g.id
+                    JOIN authors a ON b.author_id = a.id
+                    LEFT JOIN books_genres bg ON b.id = bg.book_id
+                    LEFT JOIN genres g        ON bg.genre_id = g.id
                 ORDER BY b.id
                 """;
 
@@ -72,13 +76,9 @@ public class JdbcBookRepository implements BookRepository {
 
     @Override
     public void deleteById(long id) {
-        String deleteBooksGenresQuery = "DELETE FROM books_genres WHERE book_id = :book_id";
+        removeGenresRelationsFor(id);
         String deleteBooksQuery = "DELETE FROM books WHERE id = :id";
-
-        var genresParams = Map.of("book_id", id);
         var booksParams = Map.of("id", id);
-
-        jdbc.update(deleteBooksGenresQuery, genresParams);
         jdbc.update(deleteBooksQuery, booksParams);
     }
 
@@ -105,7 +105,7 @@ public class JdbcBookRepository implements BookRepository {
         if (updated == 0) {
             throw new EntityNotFoundException("Book with id " + book.getId() + " not found");
         }
-        removeGenresRelationsFor(book);
+        removeGenresRelationsFor(book.getId());
         batchInsertGenresRelationsFor(book);
         return book;
     }
@@ -123,9 +123,9 @@ public class JdbcBookRepository implements BookRepository {
         jdbc.batchUpdate(sql, params);
     }
 
-    private void removeGenresRelationsFor(Book book) {
+    private void removeGenresRelationsFor(long bookId) {
         String sql = "DELETE FROM books_genres WHERE book_id = :book_id";
-        var params = Map.of("book_id", book.getId());
+        var params = Map.of("book_id", bookId);
         jdbc.update(sql, params);
     }
 
