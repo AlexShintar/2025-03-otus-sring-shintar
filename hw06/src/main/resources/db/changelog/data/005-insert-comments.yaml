@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-05-31-insert-comments
+      author: ash
+      changes:
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: comment_content, value: 'Comment_1_for_BookTitle_1' }
+              - column: { name: book_id, valueNumeric : 1 }
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: comment_content, value: 'Comment_2_for_BookTitle_1' }
+              - column: { name: book_id, valueNumeric : 1 }
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: comment_content, value: 'Comment_3_for_BookTitle_1' }
+              - column: { name: book_id, valueNumeric : 1 }
+
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: comment_content, value: 'Comment_1_for_BookTitle_2' }
+              - column: { name: book_id, valueNumeric : 2 }
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: comment_content, value: 'Comment_2_for_BookTitle_2' }
+              - column: { name: book_id, valueNumeric : 2 }
+
+        - insert:
+            tableName: comments
+            columns:
+              - column: { name: comment_content, value: 'Comment_1_for_BookTitle_3' }
+              - column: { name: book_id, valueNumeric : 3 }

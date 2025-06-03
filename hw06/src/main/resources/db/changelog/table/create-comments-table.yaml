@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 2025-05-31-create-books-table
+      id: 2025-05-31-create-comments-table
       author: ash
       changes:
         - createTable:
-            tableName: books
+            tableName: comments
             columns:
               - column:
                   name: id
@@ -12,18 +12,21 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
+                    nullable: false
               - column:
-                  name: title
-                  type: VARCHAR(255)
+                  name: comment_content
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: false
               - column:
-                  name: author_id
+                  name: book_id
                   type: BIGINT
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:
-            baseTableName: books
-            baseColumnNames: author_id
-            constraintName: fk_books_author
-            referencedTableName: authors
+            baseTableName: comments
+            baseColumnNames: book_id
+            constraintName: fk_comments_book
+            referencedTableName: books
             referencedColumnNames: id
             onDelete: CASCADE
