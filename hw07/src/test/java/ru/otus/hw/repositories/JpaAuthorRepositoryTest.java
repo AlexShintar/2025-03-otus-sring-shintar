@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
 import ru.otus.hw.models.Author;
 
 
@@ -17,11 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе JPA для работы с авторами")
 @DataJpaTest
-@Import(JpaAuthorRepository.class)
 class JpaAuthorRepositoryTest {
 
     @Autowired
-    private JpaAuthorRepository repository;
+    private AuthorRepository repository;
 
     @Autowired
     private TestEntityManager em;

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.CommentDto;
 
@@ -14,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @DisplayName("Интеграционные тесты")
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
 class BookAndCommentServiceIntegrationTest  {
 
     @Autowired
@@ -78,4 +81,3 @@ class BookAndCommentServiceIntegrationTest  {
         assertThat(deletedComments).isEmpty();
     }
 }
-
