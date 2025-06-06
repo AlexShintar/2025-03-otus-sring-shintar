@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-06-06-truncate-tables
+      author: ash
+      changes:
+        - sql:
+            sql: DELETE FROM comments;
+        - sql:
+            sql: ALTER TABLE comments ALTER COLUMN id RESTART WITH 1;
+        - sql:
+            sql: DELETE FROM books_genres;
+        - sql:
+            sql: DELETE FROM books;
+        - sql:
+            sql: ALTER TABLE books ALTER COLUMN id RESTART WITH 1;
+        - sql:
+            sql: DELETE FROM authors;
+        - sql:
+            sql: ALTER TABLE authors ALTER COLUMN id RESTART WITH 1;
+        - sql:
+            sql: DELETE FROM genres;
+        - sql:
+            sql: ALTER TABLE genres ALTER COLUMN id RESTART WITH 1;
